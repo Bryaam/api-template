@@ -1,0 +1,19 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  database: <%= ENV['API-TEMPLATE_DATABASE_NAME'] || 'api-template' %>
+  username: <%= ENV['API-TEMPLATE_DATABASE_USERNAME'] || 'postgres' %>
+  host: <%= ENV['API-TEMPLATE_DATABASE_HOST'] || 'localhost' %>
+  password: <%= ENV['API-TEMPLATE_DATABASE_PASSWORD'] %>
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+development:
+  <<: *default
+  database: api-template_development
+
+test:
+  <<: *default
+  database: api-template_test
+
+production:
+  <<: *default
